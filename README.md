@@ -1,1 +1,3 @@
-# modify-github-finder
+# Githup finder
+
+Githup profile finder.
