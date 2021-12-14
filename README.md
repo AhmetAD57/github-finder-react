@@ -1,3 +1,3 @@
-# Githup finder
+# Github finder
 
-Githup profile finder.
+Github profile finder with react.js.
