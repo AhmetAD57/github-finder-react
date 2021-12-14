@@ -1,16 +1,21 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import Loading from './Loading'
+import Context from '../context/github/Context';
+import User from './User';
 
-const UserDetails =({getUser, match, loading, user })=> { //Destructuring
+const UserDetails =({match})=> { //Destructuring
+    
+    const {getUser, laoding, user} = useContext(Context);
+
+    //Function component de didmount didupdate metotlarının kullanılmasının sağlıyor(Hook)  
     useEffect(()=> {
         getUser(match.params.login);
-    }, [])
-
+    }, []) //[] olunca sadece did mount için çalışır, spesific değer verildiğnde sadece o değişince çalışır
     
-    
-    const {name,avatar_url,location,html_url,bio,blog,followers,following,public_repos} = user; //Destructuring
 
-    if(loading) return <Loading />
+    const {name, avatar_url, location, html_url, bio,blog, followers, following, public_repos} = user; //Destructuring
+
+    if(laoding) return <Loading />
 
     return (
         <div className="container mt-3">
@@ -45,9 +50,9 @@ const UserDetails =({getUser, match, loading, user })=> { //Destructuring
                                     </>
                             }
                             <div>
-                                <span className="badge badge-primary m-1">Followers: {followers}</span>
-                                <span className="badge badge-danger m-1">Following: {following}</span>
-                                <span className="badge badge-success m-1">Repos: {public_repos}</span>
+                                <span className="badge bg-primary m-1">Followers: {followers}</span>
+                                <span className="badge bg-secondary m-1">Following: {following}</span>
+                                <span className="badge bg-success m-1">Repos: {public_repos}</span>
                             </div>
                         </div>
                     </div>
@@ -55,7 +60,6 @@ const UserDetails =({getUser, match, loading, user })=> { //Destructuring
             </div>
         </div>
     )
-    
 }
 
 export default UserDetails

@@ -1,9 +1,15 @@
-import React, {useState} from 'react'
-//React hook state 
-const Search =({setAlert, searchUserq, clearButtonStatus, cleanResults}) => { //Destructuring
-        
-    const [keyword, setKeyword]= useState('');
+import React, {useState, useReducer, useContext} from 'react';
+import Context from '../context/github/Context';
+import AContext from "../context/alert/AContext";
 
+const Search =() => { 
+    //Destructuring
+    const {searchUsers, cleanResults, users}= useContext(Context); //State.js deki reducer metotlarına her yerden kullanılmasını sağlıyor.
+    const {setAlert}= useContext(AContext);
+
+    //Function component de state kullanılmasının sağlıyor(Hook)  
+    const [keyword, setKeyword]= useState('');
+    
     const onChange=(e)=>{
         setKeyword(e.target.value);
     }
@@ -13,11 +19,10 @@ const Search =({setAlert, searchUserq, clearButtonStatus, cleanResults}) => { //
         if(keyword==""){
             setAlert("Please write a name", "danger");
         }else{
-            searchUserq(keyword);
+            searchUsers(keyword);
             setKeyword("");
         }
     }
-
     
     return (
         <div className="container my-3">
@@ -29,12 +34,11 @@ const Search =({setAlert, searchUserq, clearButtonStatus, cleanResults}) => { //
                     </div>
                 </div>
             </form>
-            {clearButtonStatus && <button className="btn btn-secondary btn-sm col-md-12 mt-2" onClick={cleanResults}>Clean results</button>}
-            
+            {users.length > 0 &&
+                <button className="btn btn-secondary btn-sm col-md-12 mt-2" onClick={cleanResults}>Clean results</button>
+            }
         </div>
-        
     )
-    
 }
 
 export default Search
