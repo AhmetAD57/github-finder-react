@@ -4,7 +4,7 @@
 </p>
 
 > **Live project**: https://githubfinder-axd.netlify.app 
-<br/>
+
 Github profile finder app.
 
 ## Used Tools
