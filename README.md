@@ -29,4 +29,4 @@ npm run start-wps
 - Specific user infos.
 
 ## License
-MI
+MIT
